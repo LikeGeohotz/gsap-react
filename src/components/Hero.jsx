@@ -5,11 +5,11 @@ import { heroVideo, smallHeroVideo } from '../utils';
 
 const Hero = () => {
 	const [videoSrc, setVideoSrc] = useState(
-		window.innerHeight < 760 ? smallHeroVideo : heroVideo
+		window.innerWidth < 760 ? smallHeroVideo : heroVideo
 	);
 
 	const handleVideoSrcSet = () => {
-		if (window.innerHeight < 760) {
+		if (window.innerWidth < 760) {
 			setVideoSrc(smallHeroVideo);
 		} else {
 			setVideoSrc(heroVideo);
@@ -25,7 +25,8 @@ const Hero = () => {
 	}, []);
 
 	useGSAP(() => {
-		gsap.to('#hero', { opacity: 1, duration: 1.5 });
+		gsap.to('#hero', { opacity: 1, duration: 2 });
+		gsap.to('#cta', { opacity: 1, y: -50, duration: 2 });
 	}, []);
 
 	return (
@@ -45,6 +46,16 @@ const Hero = () => {
 						<source src={videoSrc} type='video/mp4' />
 					</video>
 				</div>
+			</div>
+
+			<div
+				id='cta'
+				className='flex flex-col items-center opacity-0 translate-y-20'
+			>
+				<a href='#highlights' className='btn'>
+					Buy
+				</a>
+				<p className='font-normal text-xl'>From $199/month or $999 </p>
 			</div>
 		</section>
 	);
